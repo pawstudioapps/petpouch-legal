@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy — PetPouch</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --orange: #FF6B2B;
+      --orange-light: #fff4ef;
+      --navy: #1a1a2e;
+      --body: #3d3d3d;
+      --muted: #888;
+      --border: #ebebeb;
+      --bg: #fafaf8;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--body);
+      line-height: 1.7;
+      font-size: 16px;
+    }
+
+    header {
+      background: white;
+      border-bottom: 1px solid var(--border);
+      padding: 20px 0;
+    }
+
+    .header-inner {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo-mark {
+      width: 40px;
+      height: 40px;
+      background: var(--orange);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .logo-mark svg {
+      width: 22px;
+      height: 22px;
+      fill: white;
+    }
+
+    .logo-text {
+      font-family: 'DM Serif Display', serif;
+      font-size: 22px;
+      color: var(--navy);
+    }
+
+    .logo-text span {
+      color: var(--orange);
+    }
+
+    nav {
+      margin-left: auto;
+      display: flex;
+      gap: 24px;
+    }
+
+    nav a {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    nav a:hover, nav a.active {
+      color: var(--orange);
+    }
+
+    .hero {
+      background: white;
+      border-bottom: 1px solid var(--border);
+      padding: 48px 24px;
+      text-align: center;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: var(--orange-light);
+      color: var(--orange);
+      font-size: 12px;
+      font-weight: 500;
+      padding: 4px 12px;
+      border-radius: 20px;
+      margin-bottom: 16px;
+      letter-spacing: 0.3px;
+    }
+
+    .hero h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 36px;
+      color: var(--navy);
+      margin-bottom: 12px;
+    }
+
+    .hero p {
+      color: var(--muted);
+      font-size: 15px;
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    main {
+      max-width: 720px;
+      margin: 48px auto;
+      padding: 0 24px 80px;
+    }
+
+    .section {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 28px 32px;
+      margin-bottom: 16px;
+    }
+
+    .section-title {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--orange);
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      margin-bottom: 8px;
+    }
+
+    .section h2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 20px;
+      color: var(--navy);
+      margin-bottom: 12px;
+    }
+
+    .section p {
+      font-size: 15px;
+      color: var(--body);
+      line-height: 1.75;
+    }
+
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .summary-card {
+      background: var(--orange-light);
+      border-radius: 10px;
+      padding: 16px;
+    }
+
+    .summary-card .icon {
+      font-size: 20px;
+      margin-bottom: 8px;
+    }
+
+    .summary-card h3 {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--navy);
+      margin-bottom: 4px;
+    }
+
+    .summary-card p {
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .updated {
+      display: inline-block;
+      font-size: 12px;
+      color: var(--muted);
+      background: var(--bg);
+      border: 1px solid var(--border);
+      padding: 4px 10px;
+      border-radius: 6px;
+      margin-bottom: 24px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 32px 24px;
+      border-top: 1px solid var(--border);
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    footer a { color: var(--orange); text-decoration: none; }
+
+    @media (max-width: 600px) {
+      .hero h1 { font-size: 28px; }
+      .section { padding: 20px; }
+      nav { gap: 16px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="logo-mark">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M4.5 11c0-1.1.9-2 2-2s2 .9 2 2-.9 2-2 2-2-.9-2-2zm9 0c0-1.1.9-2 2-2s2 .9 2 2-.9 2-2 2-2-.9-2-2zM12 13c-2.33 0-7 1.17-7 3.5V18h14v-1.5c0-2.33-4.67-3.5-7-3.5zm-4.5-6C7.5 5.57 8.57 4.5 9.93 4.5c.37 0 .72.09 1.03.26C11.53 3.08 12.67 2 14 2c1.66 0 3 1.34 3 3 0 .95-.44 1.78-1.12 2.34C16.74 7.7 17.5 8.76 17.5 10c0 .28-.04.54-.09.8-.43-.17-.89-.3-1.41-.3-1.02 0-1.91.47-2.5 1.19C13 11.47 12.04 11 11 11c-.52 0-.98.13-1.41.3-.05-.26-.09-.52-.09-.8 0-1.24.76-2.3 1.62-2.66C10.44 7.28 10 6.45 10 5.5c0-.83.67-1.5 1.5-1.5S13 4.67 13 5.5c0 .36-.14.69-.36.94.14-.03.28-.05.43-.05.9 0 1.68.5 2.07 1.24C15.53 7.25 15.5 7.13 15.5 7c0-1.1-.9-2-2-2-.73 0-1.36.4-1.7.99C11.45 5.37 10.79 5 10 5c-.55 0-1 .45-1 1 0 .34.17.63.43.81C8.55 7.17 7.5 8.48 7.5 10c0-.28.04-.54.09-.8-.43.17-.89.3-1.41.3-.52 0-.98-.13-1.41-.3C4.72 9.46 4.5 9.76 4.5 10c0-1.66 1.34-3 3-3z"/>
+      </svg>
+    </div>
+    <div class="logo-text"><span>Pet</span>Pouch</div>
+    <nav>
+      <a href="index.html" class="active">Privacy</a>
+      <a href="terms.html">Terms</a>
+    </nav>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="hero-badge">Legal</div>
+  <h1>Privacy Policy</h1>
+  <p>We built PetPouch to respect you and your pets. Here's exactly how we handle your data.</p>
+</div>
+
+<main>
+  <span class="updated">Last updated: April 2026</span>
+
+  <div class="summary-grid">
+    <div class="summary-card">
+      <div class="icon">📱</div>
+      <h3>Stays on your device</h3>
+      <p>All your data is stored locally. We never see it.</p>
+    </div>
+    <div class="summary-card">
+      <div class="icon">🚫</div>
+      <h3>No tracking</h3>
+      <p>No analytics, no ads, no third-party data collection.</p>
+    </div>
+    <div class="summary-card">
+      <div class="icon">🔒</div>
+      <h3>No account needed</h3>
+      <p>Use PetPouch without creating an account or sharing personal info.</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Overview</div>
+    <h2>Your data stays on your device</h2>
+    <p>PetPouch stores all pet information locally on your iPhone or iPad using Apple's SwiftData framework. We do not collect, transmit, or share any of your personal data or your pets' data with third parties. We have no servers. We have no database of your pets.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-title">What we store</div>
+    <h2>Information you enter</h2>
+    <p>Pet names, photos, health records, vet appointments, medications, vaccinations, weight entries, allergies, and favorite foods are stored only on your device. This data never leaves your device unless you choose to export it yourself using the CSV or PDF export feature.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Photos</div>
+    <h2>Pet photos</h2>
+    <p>Pet photos you add are stored locally on your device and are never uploaded or shared. When you share a Pet Profile Card, you are sharing an image generated on your device — we play no role in that process.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Notifications</div>
+    <h2>Push notifications</h2>
+    <p>If you enable notifications, these are processed entirely on your device by Apple's notification system. We do not have access to notification content, delivery status, or any related data.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Analytics</div>
+    <h2>No tracking or analytics</h2>
+    <p>PetPouch does not collect usage analytics, crash reports, or any diagnostic data. We do not use any analytics SDKs or third-party tracking libraries. PetPouch products are ad-free and we do not allow advertisers to promote their products or services through PetPouch.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Third parties</div>
+    <h2>No third-party integrations</h2>
+    <p>PetPouch does not integrate with any third-party analytics, advertising, or data collection services. The only external service used is Apple's MapKit for vet clinic search, which is subject to Apple's own privacy policy.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Children</div>
+    <h2>Suitable for all ages</h2>
+    <p>PetPouch is suitable for all ages. We do not knowingly collect data from anyone, including children under 13.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Changes</div>
+    <h2>Policy updates</h2>
+    <p>If we update this policy, the new version will appear in the app and on this page. We will update the "Last updated" date at the top of this page.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Contact</div>
+    <h2>Questions?</h2>
+    <p>If you have any questions about this privacy policy, please email us at <a href="mailto:petpouch@ceesar.me" style="color: var(--orange); text-decoration: none;">petpouch@ceesar.me</a></p>
+  </div>
+</main>
+
+<footer>
+  <p>&copy; 2026 Paw Studio Apps · <a href="index.html">Privacy Policy</a> · <a href="terms.html">Terms of Use</a></p>
+</footer>
+
+</body>
+</html>
