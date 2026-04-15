@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Support — PetPouch</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --orange: #FF6B2B; --orange-light: #fff4ef; --navy: #1a1a2e; --body: #3d3d3d; --muted: #888; --border: #ebebeb; --bg: #fafaf8; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--body); line-height: 1.7; font-size: 16px; }
+    header { background: white; border-bottom: 1px solid var(--border); padding: 20px 0; }
+    .header-inner { max-width: 720px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; gap: 12px; }
+    .logo-text { font-family: 'DM Serif Display', serif; font-size: 22px; color: var(--navy); }
+    .logo-text span { color: var(--orange); }
+    nav { margin-left: auto; display: flex; gap: 24px; }
+    nav a { font-size: 14px; font-weight: 500; color: var(--muted); text-decoration: none; }
+    nav a:hover, nav a.active { color: var(--orange); }
+    .hero { background: white; border-bottom: 1px solid var(--border); padding: 48px 24px; text-align: center; }
+    .hero-badge { display: inline-block; background: var(--orange-light); color: var(--orange); font-size: 12px; font-weight: 500; padding: 4px 12px; border-radius: 20px; margin-bottom: 16px; }
+    .hero h1 { font-family: 'DM Serif Display', serif; font-size: 36px; color: var(--navy); margin-bottom: 12px; }
+    .hero p { color: var(--muted); font-size: 15px; max-width: 480px; margin: 0 auto; }
+    main { max-width: 720px; margin: 48px auto; padding: 0 24px 80px; }
+    .section { background: white; border: 1px solid var(--border); border-radius: 14px; padding: 28px 32px; margin-bottom: 16px; }
+    .section-title { font-size: 13px; font-weight: 500; color: var(--orange); text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 8px; }
+    .section h2 { font-family: 'DM Serif Display', serif; font-size: 20px; color: var(--navy); margin-bottom: 12px; }
+    .section p { font-size: 15px; color: var(--body); line-height: 1.75; }
+    .section p + p { margin-top: 10px; }
+    .summary-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin-bottom: 16px; }
+    .summary-card { background: var(--orange-light); border-radius: 10px; padding: 16px; }
+    .summary-card .icon { font-size: 20px; margin-bottom: 8px; }
+    .summary-card h3 { font-size: 13px; font-weight: 500; color: var(--navy); margin-bottom: 4px; }
+    .summary-card p { font-size: 12px; color: var(--muted); line-height: 1.5; }
+    .contact-btn { display: inline-block; background: var(--orange); color: white; font-size: 15px; font-weight: 500; padding: 12px 28px; border-radius: 10px; text-decoration: none; margin-top: 12px; }
+    .contact-btn:hover { opacity: 0.9; }
+    footer { text-align: center; padding: 32px 24px; border-top: 1px solid var(--border); font-size: 13px; color: var(--muted); }
+    footer a { color: var(--orange); text-decoration: none; }
+    @media (max-width: 600px) { .hero h1 { font-size: 28px; } .section { padding: 20px; } nav { gap: 16px; } }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <img src="icon.png" alt="PetPouch" style="width:40px;height:40px;border-radius:10px;flex-shrink:0;">
+    <div class="logo-text"><span>Pet</span>Pouch</div>
+    <nav>
+      <a href="index.html">Privacy</a>
+      <a href="terms.html">Terms</a>
+      <a href="support.html" class="active">Support</a>
+    </nav>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="hero-badge">Support</div>
+  <h1>How can we help?</h1>
+  <p>Find answers to common questions, or get in touch with Steven directly.</p>
+</div>
+
+<main>
+
+  <div class="summary-grid">
+    <div class="summary-card">
+      <div class="icon">🐾</div>
+      <h3>Made with care</h3>
+      <p>PetPouch is built solo by a cat dad in Seattle. We're here to help.</p>
+    </div>
+    <div class="summary-card">
+      <div class="icon">⚡</div>
+      <h3>Quick responses</h3>
+      <p>We aim to reply to all support emails within 48 hours.</p>
+    </div>
+    <div class="summary-card">
+      <div class="icon">🔒</div>
+      <h3>Your data is safe</h3>
+      <p>All pet data stays on your device. We never see it.</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">About</div>
+    <h2>What is PetPouch?</h2>
+    <p>PetPouch is a pet health tracking app for iPhone, built by a cat dad in Seattle who couldn't find anything made with real care for pet owners. It helps you keep track of everything important about your pets — from health issues, allergies and medications to vet appointments, meal schedules and vaccinations.</p>
+    <p>At a glance, the <strong>My Pets</strong> tab shows a live summary of each pet's next actions — upcoming appointments, medication times and meal reminders. Tap any pet to see their full health summary, with colour-coded status cards for allergies, health issues, medications, vaccinations, meal plan and weight. Every section is just one tap away.</p>
+    <p>PetPouch is free to download with a generous free tier, and offers a Premium subscription for unlimited pets, reminders, advanced features and more.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Getting started</div>
+    <h2>How do I add my first pet?</h2>
+    <p>Tap the <strong>My Pets</strong> tab at the bottom of the screen, then tap the <strong>+</strong> button in the top right corner. Enter your pet's name, species, breed, birthday, photo and other optional information. Tap Save and your pet will appear on the My Pets screen.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Food</div>
+    <h2>What's the difference between Schedule and Log?</h2>
+    <p><strong>Schedule</strong> is your pet's regular meal plan — the foods you normally give them, with meal times and portion sizes. Think of it as a template for what you plan to feed.</p>
+    <p><strong>Log</strong> (Premium) is a daily record of what you actually fed your pet. You can log feedings, record how your pet responded, and track actual calories against your target. The Log tab is optional — many users get great value from the Schedule alone.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Premium</div>
+    <h2>What's included in the free version vs Premium?</h2>
+    <p><strong>Free includes:</strong> 1 pet, 1 health issue, 1 allergy, 1 medication, 1 vaccination · Unlimited vet appointments · At-a-glance My Pets view with next actions · Pet health summary with colour-coded status cards · Pet notes · Meal schedule · CSV export and more.</p>
+    <p><strong>Premium includes:</strong> Unlimited pets, health records and tracking · Weight tracking with charts · Advanced calendar view · Reminders for medications, meals, vaccinations and birthdays · Food log with calorie tracking · PDF export · Pet profile card sharing.</p>
+    <p>Premium is available as a monthly ($2.99/mo) or annual ($19.99/yr) subscription.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Subscriptions</div>
+    <h2>How do I manage or cancel my subscription?</h2>
+    <p>You can manage or cancel your PetPouch Premium subscription at any time through your iPhone Settings. Go to <strong>Settings → [Your Name] → Subscriptions</strong>, find PetPouch, and tap to manage or cancel.</p>
+    <p>Cancelling will stop future charges. You'll retain Premium access until the end of your current billing period.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Notifications</div>
+    <h2>How do I enable reminders?</h2>
+    <p>Reminders are a Premium feature. Once you've upgraded, go to the <strong>Settings</strong> tab (gear icon on the My Pets screen) and toggle on the reminder types you'd like — medications, meals, vaccinations and birthdays.</p>
+    <p>If PetPouch doesn't have notification permission, you'll be prompted to enable it in your iPhone Settings.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Data</div>
+    <h2>Is my pet data backed up?</h2>
+    <p>All pet data is stored locally on your device using Apple's SwiftData framework. If you have iCloud Backup enabled on your iPhone, your PetPouch data will be included in your device backup and will restore when you set up a new iPhone.</p>
+    <p>You can also export your data as a CSV file from the Settings tab at any time.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Data</div>
+    <h2>What happens to my data if I downgrade from Premium?</h2>
+    <p>Nothing is deleted. All your existing records remain fully visible and editable. The only change is that you won't be able to add new records beyond the free tier limits. Your data is always yours.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Contact</div>
+    <h2>Still need help?</h2>
+    <p>We're happy to help with anything not covered above. Drop us an email and Steven will get back to you personally.</p>
+    <a href="mailto:pawstudioapps@outlook.com" class="contact-btn">Contact Support</a>
+  </div>
+
+</main>
+
+<footer>
+  <p>&copy; 2026 Paw Studio Apps · <a href="index.html">Privacy Policy</a> · <a href="terms.html">Terms of Use</a> · <a href="support.html">Support</a></p>
+</footer>
+
+</body>
+</html>
