@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tutorials — PetPouch</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --orange: #FF6B2B; --orange-light: #fff4ef; --navy: #1a1a2e; --body: #3d3d3d; --muted: #888; --border: #ebebeb; --bg: #fafaf8; --gold: #D4A843; --gold-light: #fdf6e3; --green: #3AAF7A; --green-light: #e8f7f0; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--body); line-height: 1.7; font-size: 16px; }
+
+    /* ── Header ── */
+    header { background: white; border-bottom: 1px solid var(--border); padding: 20px 0; }
+    .header-inner { max-width: 900px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; gap: 12px; }
+    .logo-text { font-family: 'DM Serif Display', serif; font-size: 22px; color: var(--navy); }
+    .logo-text span { color: var(--orange); }
+    nav { margin-left: auto; display: flex; align-items: center; gap: 24px; }
+    nav a { font-size: 14px; font-weight: 500; color: var(--muted); text-decoration: none; }
+    nav a:hover, nav a.active { color: var(--orange); }
+    .appstore-btn { display: inline-block; flex-shrink: 0; }
+    .appstore-btn img { height: 32px; display: block; }
+
+    /* ── Hero ── */
+    .hero { background: white; border-bottom: 1px solid var(--border); padding: 48px 24px; text-align: center; }
+    .hero-badge { display: inline-block; background: var(--orange-light); color: var(--orange); font-size: 12px; font-weight: 500; padding: 4px 12px; border-radius: 20px; margin-bottom: 16px; }
+    .hero h1 { font-family: 'DM Serif Display', serif; font-size: 36px; color: var(--navy); margin-bottom: 12px; }
+    .hero p { color: var(--muted); font-size: 15px; max-width: 480px; margin: 0 auto 28px; }
+
+    /* Summary cards (matches support/privacy page style) */
+    .summary-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; max-width: 640px; margin: 0 auto; }
+    .summary-card { background: var(--orange-light); border-radius: 10px; padding: 16px; text-align: left; }
+    .summary-card .icon { font-size: 20px; margin-bottom: 8px; }
+    .summary-card h3 { font-size: 13px; font-weight: 500; color: var(--navy); margin-bottom: 4px; }
+    .summary-card p { font-size: 12px; color: var(--muted); line-height: 1.5; }
+
+    /* ── Main ── */
+    main { max-width: 900px; margin: 40px auto; padding: 0 24px 80px; }
+
+    /* Filter bar */
+    .filter-bar { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 32px; }
+    .filter-btn { font-size: 13px; font-weight: 500; padding: 6px 16px; border-radius: 20px; border: 1.5px solid var(--border); background: white; color: var(--muted); cursor: pointer; transition: all 0.15s; font-family: 'DM Sans', sans-serif; }
+    .filter-btn:hover { border-color: var(--orange); color: var(--orange); }
+    .filter-btn.on-all     { background: var(--navy);   color: white; border-color: var(--navy); }
+    .filter-btn.on-free    { background: var(--green);  color: white; border-color: var(--green); }
+    .filter-btn.on-premium { background: var(--gold);   color: white; border-color: var(--gold); }
+    .filter-btn.on-tips    { background: var(--orange); color: white; border-color: var(--orange); }
+
+    /* Section heading */
+    .section-head { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; padding-bottom: 10px; border-bottom: 1px solid var(--border); }
+    .section-head h2 { font-family: 'DM Serif Display', serif; font-size: 22px; color: var(--navy); }
+    .tier-badge { font-size: 11px; font-weight: 500; letter-spacing: 0.5px; text-transform: uppercase; padding: 3px 10px; border-radius: 20px; }
+    .tb-free    { background: var(--green-light); color: var(--green); }
+    .tb-premium { background: var(--gold-light);  color: var(--gold); }
+    .tb-tips    { background: var(--orange-light); color: var(--orange); }
+
+    /* Tutorial card grid */
+    .card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; margin-bottom: 48px; }
+
+    /* Tutorial card */
+    .tcard { background: white; border: 1px solid var(--border); border-radius: 14px; overflow: hidden; cursor: pointer; transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s; display: flex; flex-direction: column; }
+    .tcard:hover { border-color: var(--orange); box-shadow: 0 4px 20px rgba(255,107,43,0.1); transform: translateY(-2px); }
+    .tcard.premium:hover { border-color: var(--gold); box-shadow: 0 4px 20px rgba(212,168,67,0.12); }
+
+    /* Card art */
+    .card-art { height: 148px; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+    .art-onboarding { background: linear-gradient(135deg, #fff4ef 0%, #ffd9c5 100%); }
+    .art-meals      { background: linear-gradient(135deg, #fff8e6 0%, #ffe4a0 100%); }
+    .art-vaccine    { background: linear-gradient(135deg, #e8f7f0 0%, #b8e8ce 100%); }
+    .art-vet        { background: linear-gradient(135deg, #eef0ff 0%, #cdd3f5 100%); }
+    .art-meds       { background: linear-gradient(135deg, #fdf6e3 0%, #f5e0a0 100%); }
+    .art-export     { background: linear-gradient(135deg, #f3eeff 0%, #dcd0f5 100%); }
+    .art-reminders  { background: linear-gradient(135deg, #fff0f5 0%, #f5d0e0 100%); }
+    .art-dashboard  { background: linear-gradient(135deg, #fff4ef 0%, #ffd9c5 100%); }
+    .art-multipets  { background: linear-gradient(135deg, #fdf6e3 0%, #f5e0a0 100%); }
+    .art-notes      { background: linear-gradient(135deg, #e8f7f0 0%, #b8e8ce 100%); }
+    .art-foodlog    { background: linear-gradient(135deg, #fdf6e3 0%, #ffe4a0 100%); }
+
+    /* Phone mockup */
+    .phone { width: 76px; height: 120px; background: white; border-radius: 13px; box-shadow: 0 6px 20px rgba(0,0,0,0.12), inset 0 0 0 1px rgba(0,0,0,0.07); display: flex; flex-direction: column; overflow: hidden; position: relative; }
+    .phone::before { content: ''; width: 22px; height: 3px; background: rgba(0,0,0,0.1); border-radius: 3px; position: absolute; top: 6px; left: 50%; transform: translateX(-50%); }
+    .phone-inner { margin-top: 16px; flex: 1; padding: 5px; display: flex; flex-direction: column; gap: 3px; }
+    .pl { height: 5px; border-radius: 3px; background: rgba(255,107,43,0.2); }
+    .pl.d  { background: rgba(26,26,46,0.1); }
+    .pl.or { background: var(--orange); opacity: 0.45; }
+    .pl.gd { background: var(--gold); opacity: 0.5; }
+    .pl.gr { background: var(--green); opacity: 0.45; }
+    .pl.w100 { width: 100%; } .pl.w75 { width: 75%; } .pl.w60 { width: 60%; } .pl.w50 { width: 50%; }
+    .pavatar { width: 22px; height: 22px; border-radius: 50%; background: var(--orange); opacity: 0.5; margin: 2px auto 4px; }
+    .pcard { border-radius: 5px; padding: 4px; display: flex; flex-direction: column; gap: 2px; background: rgba(255,107,43,0.08); }
+    .pcard.gd { background: rgba(212,168,67,0.1); }
+    .pcard.gr { background: rgba(58,175,122,0.1); }
+    .prow { display: flex; align-items: center; gap: 3px; }
+    .pdot { width: 5px; height: 5px; border-radius: 50%; background: var(--orange); opacity: 0.55; flex-shrink: 0; }
+    .pdot.gd { background: var(--gold); opacity: 0.8; }
+    .pdot.gr { background: var(--green); opacity: 0.8; }
+
+    /* Card badges */
+    .art-tag { position: absolute; top: 10px; right: 10px; font-size: 10px; font-weight: 500; letter-spacing: 0.4px; text-transform: uppercase; padding: 3px 8px; border-radius: 20px; }
+    .tag-free    { background: var(--green); color: white; }
+    .tag-premium { background: var(--gold);  color: white; }
+    .art-meta { position: absolute; bottom: 10px; left: 10px; font-size: 10px; color: var(--muted); background: rgba(255,255,255,0.85); padding: 2px 8px; border-radius: 20px; }
+
+    /* Card body */
+    .card-body { padding: 16px 20px 18px; flex: 1; display: flex; flex-direction: column; }
+    .card-title { font-family: 'DM Serif Display', serif; font-size: 17px; color: var(--navy); margin-bottom: 6px; line-height: 1.25; }
+    .card-desc { font-size: 13px; color: var(--muted); line-height: 1.55; flex: 1; margin-bottom: 14px; }
+    .card-link { font-size: 13px; font-weight: 500; color: var(--orange); display: inline-flex; align-items: center; gap: 4px; transition: gap 0.15s; }
+    .tcard.premium .card-link { color: var(--gold); }
+    .tcard:hover .card-link { gap: 8px; }
+
+    /* ── Modal ── */
+    .overlay { position: fixed; inset: 0; background: rgba(26,26,46,0.5); backdrop-filter: blur(4px); z-index: 200; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.25s; }
+    .overlay.open { opacity: 1; pointer-events: all; }
+    .modal { background: white; border-radius: 18px; width: min(580px, 94vw); max-height: 88vh; overflow-y: auto; box-shadow: 0 20px 60px rgba(0,0,0,0.18); transform: translateY(14px) scale(0.98); transition: transform 0.25s ease; }
+    .overlay.open .modal { transform: translateY(0) scale(1); }
+
+    .modal-hd { padding: 28px 32px 20px; border-bottom: 1px solid var(--border); display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; position: sticky; top: 0; background: white; border-radius: 18px 18px 0 0; }
+    .modal-hd-text { flex: 1; }
+    .modal-eyebrow { font-size: 11px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
+    .modal-title { font-family: 'DM Serif Display', serif; font-size: 24px; color: var(--navy); line-height: 1.2; }
+    .modal-close { width: 32px; height: 32px; border-radius: 50%; background: var(--bg); border: 1px solid var(--border); cursor: pointer; font-size: 15px; display: flex; align-items: center; justify-content: center; color: var(--muted); flex-shrink: 0; font-family: 'DM Sans', sans-serif; transition: background 0.15s; }
+    .modal-close:hover { background: var(--border); }
+
+    .modal-bd { padding: 24px 32px 32px; }
+
+    /* Progress */
+    .prog-wrap { margin-bottom: 24px; }
+    .prog-meta { display: flex; justify-content: space-between; font-size: 12px; color: var(--muted); margin-bottom: 6px; }
+    .prog-track { height: 3px; background: var(--border); border-radius: 3px; overflow: hidden; }
+    .prog-fill { height: 100%; background: var(--orange); border-radius: 3px; transition: width 0.35s ease; }
+    .prog-fill.gold { background: var(--gold); }
+
+    /* Steps */
+    .steps { display: flex; flex-direction: column; }
+    .step { display: flex; gap: 14px; padding: 12px 10px; margin: 0 -10px; border-radius: 10px; cursor: pointer; transition: background 0.15s; border-bottom: 1px solid var(--border); }
+    .step:last-child { border-bottom: none; }
+    .step:hover { background: var(--orange-light); }
+    .step.active { background: var(--orange-light); }
+    .step-num { width: 28px; height: 28px; border-radius: 50%; background: var(--bg); border: 1.5px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 500; color: var(--muted); flex-shrink: 0; transition: all 0.2s; }
+    .step.active .step-num { background: var(--orange); border-color: var(--orange); color: white; }
+    .step.done .step-num { background: var(--green); border-color: var(--green); color: white; }
+    .step-body { flex: 1; }
+    .step-title { font-size: 14px; font-weight: 500; color: var(--navy); margin-bottom: 2px; line-height: 1.3; }
+    .step.active .step-title { color: var(--orange); }
+    .step-detail { font-size: 13px; color: var(--body); line-height: 1.6; display: none; margin-top: 4px; }
+    .step.active .step-detail { display: block; }
+    .tip { background: var(--orange-light); border-left: 3px solid var(--orange); border-radius: 6px; padding: 8px 12px; font-size: 12.5px; color: var(--orange); margin-top: 8px; line-height: 1.5; }
+
+    /* Modal nav */
+    .modal-nav { display: flex; justify-content: space-between; align-items: center; margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--border); }
+    .btn { font-size: 14px; font-weight: 500; padding: 9px 22px; border-radius: 10px; cursor: pointer; border: none; display: inline-flex; align-items: center; gap: 6px; transition: all 0.15s; font-family: 'DM Sans', sans-serif; }
+    .btn-ghost { background: transparent; color: var(--muted); border: 1.5px solid var(--border); }
+    .btn-ghost:hover { border-color: var(--muted); color: var(--body); }
+    .btn-orange { background: var(--orange); color: white; }
+    .btn-orange:hover { opacity: 0.9; }
+    .btn-gold { background: var(--gold); color: white; }
+    .btn-gold:hover { opacity: 0.9; }
+    .step-counter { font-size: 13px; color: var(--muted); }
+
+    /* ── Footer ── */
+    footer { text-align: center; padding: 32px 24px; border-top: 1px solid var(--border); font-size: 13px; color: var(--muted); }
+    footer a { color: var(--orange); text-decoration: none; }
+
+    @media (max-width: 600px) {
+      .hero h1 { font-size: 28px; }
+      nav { gap: 16px; }
+      .modal-hd { padding: 20px 20px 16px; }
+      .modal-bd { padding: 18px 20px 24px; }
+    }
+
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    .tcard { animation: fadeUp 0.3s ease both; }
+    .card-grid .tcard:nth-child(1) { animation-delay: 0.04s; }
+    .card-grid .tcard:nth-child(2) { animation-delay: 0.08s; }
+    .card-grid .tcard:nth-child(3) { animation-delay: 0.12s; }
+    .card-grid .tcard:nth-child(4) { animation-delay: 0.16s; }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <img src="icon.png" alt="PetPouch" style="width:40px;height:40px;border-radius:10px;flex-shrink:0;">
+    <div class="logo-text"><span>Pet</span>Pouch</div>
+    <nav>
+      <a href="index.html">Privacy</a>
+      <a href="terms.html">Terms</a>
+      <a href="support.html">Support</a>
+      <a href="tutorials.html" class="active">Tutorials</a>
+      <a href="https://apps.apple.com/app/petpouch/id6761345986" target="_blank" class="appstore-btn">
+        <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="Download on the App Store">
+      </a>
+    </nav>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="hero-badge">Tutorials</div>
+  <h1>Learn PetPouch</h1>
+  <p>Short, friendly guides to help you get the most out of the app — from your first setup to advanced health tracking.</p>
+  <div class="summary-grid">
+    <div class="summary-card">
+      <div class="icon">📖</div>
+      <h3>Step by step</h3>
+      <p>Follow each tutorial at your own pace, tap any step to jump to it.</p>
+    </div>
+    <div class="summary-card">
+      <div class="icon">⚡</div>
+      <h3>Quick &amp; clear</h3>
+      <p>Each tutorial takes just 1–3 minutes to complete.</p>
+    </div>
+    <div class="summary-card">
+      <div class="icon">🐾</div>
+      <h3>Free &amp; Premium</h3>
+      <p>Covers all features across both tiers.</p>
+    </div>
+  </div>
+</div>
+
+<main>
+
+  <!-- Filter bar -->
+  <div class="filter-bar">
+    <button class="filter-btn on-all" onclick="filter('all', this)">All tutorials</button>
+    <button class="filter-btn" onclick="filter('free', this)">Free features</button>
+    <button class="filter-btn" onclick="filter('premium', this)">Premium features</button>
+    <button class="filter-btn" onclick="filter('tips', this)">Tips &amp; Tricks</button>
+  </div>
+
+  <!-- FREE -->
+  <div class="section-head" id="head-free">
+    <h2>Free features</h2>
+    <span class="tier-badge tb-free">Included</span>
+  </div>
+  <div class="card-grid" id="grid-free">
+
+    <div class="tcard" data-tier="free" onclick="open_modal('onboarding')">
+      <div class="card-art art-onboarding">
+        <span class="art-tag tag-free">Free</span>
+        <span class="art-meta">4 steps · 2 min</span>
+        <div class="phone"><div class="phone-inner">
+          <div class="pavatar"></div>
+          <div class="pl or w75"></div>
+          <div class="pl d w50"></div>
+          <div class="pcard">
+            <div class="prow"><div class="pdot"></div><div class="pl w100" style="height:4px;background:rgba(255,107,43,0.2)"></div></div>
+            <div class="prow"><div class="pdot"></div><div class="pl w75"  style="height:4px;background:rgba(255,107,43,0.13)"></div></div>
+          </div>
+        </div></div>
+      </div>
+      <div class="card-body">
+        <div class="card-title">Add Your First Pet</div>
+        <div class="card-desc">Set up your pet's profile with photo, breed, birthday, and weight.</div>
+        <span class="card-link">Start tutorial →</span>
+      </div>
+    </div>
+
+    <div class="tcard" data-tier="free" onclick="open_modal('meals')">
+      <div class="card-art art-meals">
+        <span class="art-tag tag-free">Free</span>
+        <span class="art-meta">5 steps · 3 min</span>
+        <div class="phone"><div class="phone-inner">
+          <div class="pl d w50"></div>
+          <div class="pcard" style="background:rgba(255,200,50,0.1)">
+            <div class="prow"><div class="pdot" style="background:#E8A020;opacity:0.8"></div><div class="pl w100" style="height:4px;background:rgba(232,160,32,0.25)"></div></div>
+            <div class="prow"><div class="pdot" style="background:#E8A020;opacity:0.8"></div><div class="pl w75"  style="height:4px;background:rgba(232,160,32,0.18)"></div></div>
+            <div class="prow"><div class="pdot" style="background:#E8A020;opacity:0.8"></div><div class="pl w60"  style="height:4px;background:rgba(232,160,32,0.12)"></div></div>
+          </div>
+          <div class="pl d w75" style="margin-top:2px"></div>
+        </div></div>
+      </div>
+      <div class="card-body">
+        <div class="card-title">Set Up Meal Tracking</div>
+        <div class="card-desc">Add feeding schedules and portion sizes so you never miss a mealtime.</div>
+        <span class="card-link">Start tutorial →</span>
+      </div>
+    </div>
+
+    <div class="tcard" data-tier="free" onclick="open_modal('vaccine')">
+      <div class="card-art art-vaccine">
+        <span class="art-tag tag-free">Free</span>
+        <span class="art-meta">3 steps · 2 min</span>
+        <div class="phone"><div class="phone-inner">
+          <div class="pl d w60"></div>
+          <div class="pl gr w100"></div>
+          <div style="display:flex;gap:4px;margin-top:2px">
+            <div style="flex:1;height:26px;background:rgba(58,175,122,0.12);border-radius:5px;display:flex;align-items:center;justify-content:center"><div class="pdot gr"></div></div>
+            <div style="flex:1;height:26px;background:rgba(58,175,122,0.07);border-radius:5px"></div>
+          </div>
+          <div class="pl d w75" style="margin-top:2px"></div>
+        </div></div>
+      </div>
+      <div class="card-body">
+        <div class="card-title">Log a Vaccination</div>
+        <div class="card-desc">Record vaccines and keep your pet's health history in one place.</div>
+        <span class="card-link">Start tutorial →</span>
+      </div>
+    </div>
+
+    <div class="tcard" data-tier="free" onclick="open_modal('vet')">
+      <div class="card-art art-vet">
+        <span class="art-tag tag-free">Free</span>
+        <span class="art-meta">4 steps · 2 min</span>
+        <div class="phone"><div class="phone-inner">
+          <div class="pl d w75"></div>
+          <div class="pcard" style="background:rgba(100,120,240,0.08)">
+            <div class="pl w50" style="height:4px;background:rgba(100,120,240,0.3)"></div>
+            <div class="pl w75" style="height:4px;background:rgba(100,120,240,0.18)"></div>
+          </div>
+          <div class="pl d w60"></div>
+        </div></div>
+      </div>
+      <div class="card-body">
+        <div class="card-title">Add a Vet Appointment</div>
+        <div class="card-desc">Schedule visits and see them on your pet's Next Actions card.</div>
+        <span class="card-link">Start tutorial →</span>
+      </div>
+    </div>
+
+  </div><!-- /grid-free -->
+
+  <!-- PREMIUM -->
+  <div class="section-head" id="head-premium">
+    <h2>Premium features</h2>
+    <span class="tier-badge tb-premium">Premium</span>
+  </div>
+  <div class="card-grid" id="grid-premium">
+
+    <div class="tcard premium" data-tier="premium" onclick="open_modal('meds')">
+      <div class="card-art art-meds">
+        <span class="art-tag tag-premium">Premium</span>
+        <span class="art-meta">5 steps · 3 min</span>
+        <div class="phone"><div class="phone-inner">
+          <div class="pl d w60"></div>
+          <div class="pcard gd">
+            <div class="prow"><div class="pdot gd"></div><div class="pl w100" style="height:4px;background:rgba(212,168,67,0.25)"></div></div>
+            <div class="prow"><div class="pdot gd"></div><div class="pl w75"  style="height:4px;background:rgba(212,168,67,0.18)"></div></div>
+          </div>
+          <div class="pl gd w75"></div>
+        </div></div>
+      </div>
+      <div class="card-body">
+        <div class="card-title">Set Up Medication Reminders</div>
+        <div class="card-desc">Add medications with dosage type, schedule, and automated reminders.</div>
+        <span class="card-link">Start tutorial →</span>
+      </div>
+    </div>
+
+    <div class="tcard premium" data-tier="premium" onclick="open_modal('foodlog')">
+      <div class="card-art art-foodlog">
+        <span class="art-tag tag-premium">Premium</span>
+        <span class="art-meta">4 steps · 2 min</span>
+        <div class="phone"><div class="phone-inner">
+          <div class="pl d w60"></div>
+          <div class="pcard gd">
+            <div class="prow"><div class="pdot gd"></div><div class="pl w100" style="height:4px;background:rgba(212,168,67,0.25)"></div></div>
+            <div class="prow"><div class="pdot gd"></div><div class="pl w75"  style="height:4px;background:rgba(212,168,67,0.18)"></div></div>
+            <div class="prow"><div class="pdot gd"></div><div class="pl w50"  style="height:4px;background:rgba(212,168,67,0.12)"></div></div>
+          </div>
+          <div class="pl gd w60"></div>
+        </div></div>
+      </div>
+      <div class="card-body">
+        <div class="card-title">Log Daily Food Intake</div>
+        <div class="card-desc">Record what your pet actually ate each day and track calories against your target.</div>
+        <span class="card-link">Start tutorial →</span>
+      </div>
+    </div>
+
+    <div class="tcard premium" data-tier="premium" onclick="open_modal('export')">
+      <div class="card-art art-export">
+        <span class="art-tag tag-premium">Premium</span>
+        <span class="art-meta">3 steps · 2 min</span>
+        <div class="phone"><div class="phone-inner">
+          <div class="pl d w75"></div>
+          <div style="display:flex;gap:4px">
+            <div style="flex:1;height:30px;background:rgba(140,100,240,0.12);border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:13px">📄</div>
+            <div style="flex:1;height:30px;background:rgba(140,100,240,0.07);border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:13px">📊</div>
+          </div>
+          <div class="pl d w50" style="margin-top:2px"></div>
+        </div></div>
+      </div>
+      <div class="card-body">
+        <div class="card-title">Export Health Records</div>
+        <div class="card-desc">Generate a PDF or CSV of your pet's full health history — perfect for vet visits.</div>
+        <span class="card-link">Start tutorial →</span>
+      </div>
+    </div>
+
+    <div class="tcard premium" data-tier="premium" onclick="open_modal('reminders')">
+      <div class="card-art art-reminders">
+        <span class="art-tag tag-premium">Premium</span>
+        <span class="art-meta">3 steps · 2 min</span>
+        <div class="phone"><div class="phone-inner">
+          <div class="pl d w60"></div>
+          <div class="pcard" style="background:rgba(240,100,140,0.08)">
+            <div class="pl w100" style="height:4px;background:rgba(240,100,140,0.25)"></div>
+            <div class="pl w75"  style="height:4px;background:rgba(240,100,140,0.16)"></div>
+            <div class="pl w50"  style="height:4px;background:rgba(240,100,140,0.1)"></div>
+          </div>
+          <div class="pl d w75" style="margin-top:2px"></div>
+        </div></div>
+      </div>
+      <div class="card-body">
+        <div class="card-title">Configure All Reminders</div>
+        <div class="card-desc">Set up birthday, vaccination expiry, and medication alerts so nothing slips through.</div>
+        <span class="card-link">Start tutorial →</span>
+      </div>
+    </div>
+
+    <div class="tcard premium" data-tier="premium" onclick="open_modal('multipets')" style="max-width:340px;">
+      <div class="card-art art-multipets">
+        <span class="art-tag tag-premium">Premium</span>
+        <span class="art-meta">3 steps · 2 min</span>
+        <div class="phone"><div class="phone-inner">
+          <div style="display:flex;gap:4px;margin-bottom:4px">
+            <div style="width:18px;height:18px;border-radius:50%;background:var(--orange);opacity:0.5"></div>
+            <div style="width:18px;height:18px;border-radius:50%;background:var(--gold);opacity:0.5"></div>
+          </div>
+          <div class="pl d w75"></div>
+          <div class="pl d w60"></div>
+          <div class="pl d w50"></div>
+        </div></div>
+      </div>
+      <div class="card-body">
+        <div class="card-title">Managing Multiple Pets</div>
+        <div class="card-desc">Add a second pet and see how the app keeps each pet's records neatly separate.</div>
+        <span class="card-link">Start tutorial →</span>
+      </div>
+    </div>
+
+  </div><!-- /grid-premium -->
+
+  <!-- TIPS & TRICKS -->
+  <div class="section-head" id="head-tips">
+    <h2>Tips &amp; Tricks</h2>
+    <span class="tier-badge tb-tips">Discover more</span>
+  </div>
+  <div class="card-grid" id="grid-tips">
+
+    <div class="tcard" data-tier="tips" onclick="open_modal('dashboard')">
+      <div class="card-art art-dashboard">
+        <span class="art-tag tag-free">Free</span>
+        <span class="art-meta">3 steps · 1 min</span>
+        <div class="phone"><div class="phone-inner">
+          <div class="pcard" style="background:rgba(255,107,43,0.08);border-left:2px solid var(--orange)">
+            <div class="pl or w100"></div>
+            <div class="pl w75" style="height:4px;background:rgba(255,107,43,0.18)"></div>
+            <div class="pl w50" style="height:4px;background:rgba(255,107,43,0.12)"></div>
+          </div>
+          <div class="pl d w75"></div>
+          <div class="pl d w60"></div>
+        </div></div>
+      </div>
+      <div class="card-body">
+        <div class="card-title">Understanding the Dashboard</div>
+        <div class="card-desc">Learn how the Next Actions card surfaces what matters most each day at a glance.</div>
+        <span class="card-link">Start tutorial →</span>
+      </div>
+    </div>
+
+    <div class="tcard" data-tier="tips" onclick="open_modal('notes')">
+      <div class="card-art art-notes">
+        <span class="art-tag tag-free">Free</span>
+        <span class="art-meta">2 steps · 1 min</span>
+        <div class="phone"><div class="phone-inner">
+          <div class="pl d w75"></div>
+          <div class="pcard gr">
+            <div class="pl w100" style="height:4px;background:rgba(58,175,122,0.25)"></div>
+            <div class="pl w100" style="height:4px;background:rgba(58,175,122,0.16)"></div>
+            <div class="pl w60"  style="height:4px;background:rgba(58,175,122,0.1)"></div>
+          </div>
+          <div class="pl d w50"></div>
+        </div></div>
+      </div>
+      <div class="card-body">
+        <div class="card-title">Pet Notes &amp; Banners</div>
+        <div class="card-desc">Keep a free-form health journal with notes that appear as banners on the pet profile.</div>
+        <span class="card-link">Start tutorial →</span>
+      </div>
+    </div>
+
+  </div><!-- /grid-tips -->
+
+</main>
+
+<footer>
+  <p>&copy; 2026 Paw Studio Apps · <a href="index.html">Privacy Policy</a> · <a href="terms.html">Terms of Use</a> · <a href="support.html">Support</a> · <a href="tutorials.html">Tutorials</a></p>
+</footer>
+
+<!-- Modal -->
+<div class="overlay" id="overlay" onclick="handle_overlay(event)">
+  <div class="modal" id="modal">
+    <div class="modal-hd">
+      <div class="modal-hd-text">
+        <div class="modal-eyebrow" id="m-eyebrow"></div>
+        <div class="modal-title"   id="m-title"></div>
+      </div>
+      <button class="modal-close" onclick="close_modal()">✕</button>
+    </div>
+    <div class="modal-bd">
+      <div class="prog-wrap">
+        <div class="prog-meta">
+          <span id="m-prog-label">Step 1 of 4</span>
+          <span id="m-prog-pct">25%</span>
+        </div>
+        <div class="prog-track"><div class="prog-fill" id="m-prog-fill" style="width:25%"></div></div>
+      </div>
+      <div class="steps" id="m-steps"></div>
+      <div class="modal-nav">
+        <button class="btn btn-ghost"  id="m-back" onclick="step_back()">← Back</button>
+        <span class="step-counter"     id="m-counter">1 / 4</span>
+        <button class="btn btn-orange" id="m-next" onclick="step_next()">Next →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const DATA = {
+  onboarding: {
+    title: "Add Your First Pet",
+    eyebrow: "Free · 4 steps · 2 min",
+    tier: "free",
+    steps: [
+      { title: "Tap the + button", detail: "Open PetPouch and tap the + button in the top right of the My Pets tab to start the Add Pet flow." },
+      { title: "Enter name & species", detail: "Type your pet's name, select their species. This will be shown throughout the app." },
+      { title: "Add a photo of your furry friend", detail: "Tap the photo circle to take a new photo or pick one from your library. PetPouch compresses it automatically.", tip: "Use a clear photo of your actual pet — it makes the My Pets screen feel personal and helps tell your pets apart at a glance, especially if you have multiple pets. You can update the photo any time from their profile." },
+      { title: "Set birthday & weight", detail: "Enter your pet's date of birth and current weight. You can choose kg or lbs per pet and change it any time in Settings." }
+    ]
+  },
+  meals: {
+    title: "Set Up Meal Tracking",
+    eyebrow: "Free · 5 steps · 3 min",
+    tier: "free",
+    steps: [
+      { title: "Go to the Food tab", detail: "Tap Food in the bottom navigation. Your pets are listed with collapsible sections for each." },
+      { title: "Tap Add Food Entry", detail: "Select your pet, then tap Add Food Entry. You can add wet food, dry food, or treats." },
+      { title: "Enter food details", detail: "Give the food a name (e.g. 'Royal Canin Adult'), set the portion size, and choose the unit, such as grams, oz, or cups." },
+      { title: "Set a feeding schedule", detail: "Choose how often this food is given: once daily, twice daily, or a custom interval." },
+      { title: "Check the Next Actions card", detail: "Head back to My Pets — upcoming mealtimes will now appear on the at-a-glance card.", tip: "Add multiple food entries if your pet eats a mix of wet and dry food." }
+    ]
+  },
+  vaccine: {
+    title: "Log a Vaccination",
+    eyebrow: "Free · 3 steps · 2 min",
+    tier: "free",
+    steps: [
+      { title: "Open your pet's profile", detail: "Tap your pet's card on the My Pets tab to open their full profile." },
+      { title: "Find Vaccinations", detail: "Scroll to the Vaccinations section and tap Add Vaccination. You can also access this directly from the Vaccinations tab at the bottom of the screen." },
+      { title: "Enter vaccine details", detail: "Enter the vaccine name (e.g. 'Rabies'), the date it was given, and the next due date. PetPouch will remind you when it's coming up.", tip: "You can log historical vaccines too — just enter the past date." }
+    ]
+  },
+  vet: {
+    title: "Add a Vet Appointment",
+    eyebrow: "Free · 4 steps · 2 min",
+    tier: "free",
+    steps: [
+      { title: "Open your pet's profile", detail: "Tap your pet's name to open their profile page." },
+      { title: "Tap Appointments", detail: "Scroll to the Appointments section and tap Add Appointment. You can also access this directly from the Appointments tab at the bottom of the screen." },
+      { title: "Enter appointment details", detail: "Add the date, time, and a note about the visit (e.g. 'Annual checkup'). You can search for your vet clinic or enter it manually." },
+      { title: "See it on the Next Actions card", detail: "Go back to My Pets — upcoming appointments appear on the at-a-glance card, ordered soonest first.", tip: "Appointments within 7 days are highlighted so you never miss one." }
+    ]
+  },
+  meds: {
+    title: "Set Up Medication Reminders",
+    eyebrow: "Premium · 5 steps · 3 min",
+    tier: "premium",
+    steps: [
+      { title: "Open your pet's profile", detail: "Tap your pet's card on the My Pets tab." },
+      { title: "Go to Medications", detail: "Scroll to the Medications section and tap Add Medication." },
+      { title: "Choose a dosage type", detail: "Select dosage type, such as Solid (tablets), Liquid (ml), or Topical (applications). The dosage picker adapts to your choice." },
+      { title: "Set the schedule", detail: "Choose how often the medication is given — daily, every few days, or a custom interval. Set a start date and optionally an end date." },
+      { title: "Enable reminders", detail: "Turn on notifications for this medication. You'll get an alert at the time you set for every dose. Tap the notification to jump straight to the medication screen." }
+    ]
+  },
+  foodlog: {
+    title: "Log Daily Food Intake",
+    eyebrow: "Premium · 4 steps · 2 min",
+    tier: "premium",
+    steps: [
+      { title: "Go to the Food tab", detail: "Tap Food in the bottom navigation, then select the Log tab at the top of the screen. This is separate from Schedule, which is your regular meal plan." },
+      { title: "Tap Log a Feeding", detail: "Select your pet, then tap Log a Feeding. You can log any food — from their regular schedule or something different." },
+      { title: "Record what they ate", detail: "Choose the food, enter the actual amount given, and note how your pet responded if you like. The log records the real date and time automatically.", tip: "You can log multiple feedings throughout the day — handy if you split meals or give treats." },
+      { title: "Track calories against your target", detail: "At the top of the Log tab you'll see today's calorie total compared to your pet's daily target. Green means you're on track.", tip: "Set your pet's daily calorie target in their profile under Food Settings." }
+    ]
+  },
+  export: {
+    title: "Export Health Records",
+    eyebrow: "Premium · 3 steps · 2 min",
+    tier: "premium",
+    steps: [
+      { title: "Open your pet's profile", detail: "Tap your pet on the My Pets tab." },
+      { title: "Tap the action button", detail: "Tap the action button at the top of the screen to export a PDF of your pet's health records." },
+      { title: "Export as PDF", detail: "Your pet's vaccinations, medications, appointments, and weight history are compiled into a formatted PDF — ideal for printing or sharing with your vet.", tip: "Full pet records can also be exported as CSV from the Settings tab." }
+    ]
+  },
+  reminders: {
+    title: "Configure All Reminders",
+    eyebrow: "Premium · 3 steps · 2 min",
+    tier: "premium",
+    steps: [
+      { title: "Go to Settings", detail: "Tap the gear icon in the top right of the My Pets tab." },
+      { title: "Open Notifications", detail: "Tap Notifications to see all reminder types: medications, meals, vaccinations, and birthdays." },
+      { title: "Allow notifications in iOS", detail: "If prompted, tap Allow so PetPouch can deliver reminders to your lock screen." }
+    ]
+  },
+  multipets: {
+    title: "Managing Multiple Pets",
+    eyebrow: "Premium · 3 steps · 2 min",
+    tier: "premium",
+    steps: [
+      { title: "Add a second pet", detail: "Tap the + button on the My Pets tab and complete the setup steps for your next pet. Adding more than one pet requires a Premium subscription." },
+      { title: "Switch between pets", detail: "All pets appear as cards on the My Pets tab, each with their own Next Actions card. Scroll down to see them all." },
+      { title: "Separate profiles", detail: "Each pet has a fully independent profile — their own health records, medications, and appointments are kept separate.", tip: "The Food tab groups entries by pet with collapsible sections, making different diets easy to manage." }
+    ]
+  },
+  dashboard: {
+    title: "Understanding the Dashboard",
+    eyebrow: "Tips & Tricks · 3 steps · 1 min",
+    tier: "free",
+    steps: [
+      { title: "Find the Next Actions card", detail: "On the My Pets tab, tap View Pet to open a pet's page. At the top you'll see the Next Actions card showing what needs attention soon." },
+      { title: "What appears on the card", detail: "The card shows upcoming appointments, medications due, meals, and overdue vaccinations." },
+      { title: "Tap to act", detail: "Tap any item on the card to jump directly to that record so you can update it quickly.", tip: "An empty card means nothing needs attention — that's a good sign! 🎉" }
+    ]
+  },
+  notes: {
+    title: "Pet Notes & Banners",
+    eyebrow: "Tips & Tricks · 2 steps · 1 min",
+    tier: "free",
+    steps: [
+      { title: "Add a note", detail: "Open your pet's profile, scroll to Notes, and tap Add Note. Type anything — observations, behaviour changes, dietary notes." },
+      { title: "See the banner", detail: "Your most recent note appears as a banner at the top of your pet's profile so it's always visible at a glance.", tip: "Great for tracking anything your vet has asked you to keep an eye on between appointments." }
+    ]
+  }
+};
+
+let current = null, step = 0;
+
+function open_modal(id) {
+  current = id; step = 0;
+  const t = DATA[id];
+  document.getElementById('m-title').textContent = t.title;
+  document.getElementById('m-eyebrow').textContent = t.eyebrow;
+  document.getElementById('m-prog-fill').className = 'prog-fill' + (t.tier === 'premium' ? ' gold' : '');
+  render();
+  document.getElementById('overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function close_modal() {
+  document.getElementById('overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function handle_overlay(e) {
+  if (e.target === document.getElementById('overlay')) close_modal();
+}
+
+function render() {
+  const t = DATA[current];
+  const total = t.steps.length;
+  const list = document.getElementById('m-steps');
+  list.innerHTML = '';
+
+  t.steps.forEach((s, i) => {
+    const div = document.createElement('div');
+    div.className = 'step' + (i === step ? ' active' : '') + (i < step ? ' done' : '');
+    div.onclick = () => { step = i; render(); };
+
+    const num = document.createElement('div');
+    num.className = 'step-num';
+    num.textContent = i < step ? '✓' : (i + 1);
+
+    const body = document.createElement('div');
+    body.className = 'step-body';
+    body.innerHTML = `<div class="step-title">${s.title}</div>
+      <div class="step-detail">${s.detail}${s.tip ? `<div class="tip">💡 ${s.tip}</div>` : ''}</div>`;
+
+    div.appendChild(num); div.appendChild(body);
+    list.appendChild(div);
+  });
+
+  const pct = Math.round(((step + 1) / total) * 100);
+  document.getElementById('m-prog-fill').style.width = pct + '%';
+  document.getElementById('m-prog-label').textContent = `Step ${step + 1} of ${total}`;
+  document.getElementById('m-prog-pct').textContent = pct + '%';
+  document.getElementById('m-counter').textContent = `${step + 1} / ${total}`;
+
+  const back = document.getElementById('m-back');
+  const next = document.getElementById('m-next');
+  back.style.visibility = step === 0 ? 'hidden' : 'visible';
+  next.className = 'btn ' + (t.tier === 'premium' ? 'btn-gold' : 'btn-orange');
+
+  if (step === total - 1) { next.textContent = 'Done ✓'; next.onclick = close_modal; }
+  else                    { next.textContent = 'Next →'; next.onclick = step_next;  }
+}
+
+function step_next() { if (step < DATA[current].steps.length - 1) { step++; render(); } }
+function step_back() { if (step > 0) { step--; render(); } }
+
+function filter(tier, el) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.className = 'filter-btn');
+  el.className = 'filter-btn on-' + tier;
+  document.querySelectorAll('.tcard').forEach(c => {
+    c.style.display = (tier === 'all' || c.dataset.tier === tier) ? '' : 'none';
+  });
+  ['free', 'premium', 'tips'].forEach(t => {
+    const grid = document.getElementById('grid-' + t);
+    const head = document.getElementById('head-' + t);
+    const vis = Array.from(grid.querySelectorAll('.tcard')).some(c => c.style.display !== 'none');
+    grid.style.display = head.style.display = vis ? '' : 'none';
+  });
+}
+
+document.addEventListener('keydown', e => { if (e.key === 'Escape') close_modal(); });
+</script>
+</body>
+</html>
